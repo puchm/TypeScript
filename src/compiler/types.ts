@@ -5367,6 +5367,16 @@ export interface TypeChecker {
     isTypeInvalidDueToUnionDiscriminant(contextualType: Type, obj: ObjectLiteralExpression | JsxAttributes): boolean;
     /** @internal */ getExactOptionalProperties(type: Type): Symbol[];
     /**
+     * The following symbols are considered read-only:
+     * - Properties with a 'readonly' modifier
+     * - Variables declared with 'const'
+     * - Get accessors without matching set accessors
+     * - Enum members
+     * - Object.defineProperty assignments with writable false or no setter
+     * - Unions and intersections of the above (unions and intersections eagerly set isReadonly on creation)
+     */
+    isReadonlySymbol(symbol: Symbol): boolean;
+    /**
      * For a union, will include a property if it's defined in *any* of the member types.
      * So for `{ a } | { b }`, this will include both `a` and `b`.
      * Does not include properties of primitive types.

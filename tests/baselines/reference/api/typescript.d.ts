@@ -6332,6 +6332,16 @@ declare namespace ts {
          * True if this type is assignable to `ReadonlyArray<any>`.
          */
         isArrayLikeType(type: Type): boolean;
+        /**
+         * The following symbols are considered read-only:
+         * - Properties with a 'readonly' modifier
+         * - Variables declared with 'const'
+         * - Get accessors without matching set accessors
+         * - Enum members
+         * - Object.defineProperty assignments with writable false or no setter
+         * - Unions and intersections of the above (unions and intersections eagerly set isReadonly on creation)
+         */
+        isReadonlySymbol(symbol: Symbol): boolean;
         resolveName(name: string, location: Node | undefined, meaning: SymbolFlags, excludeGlobals: boolean): Symbol | undefined;
         getTypePredicateOfSignature(signature: Signature): TypePredicate | undefined;
         /**

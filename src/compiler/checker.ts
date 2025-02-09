@@ -1850,6 +1850,7 @@ export function createTypeChecker(host: TypeCheckerHost): TypeChecker {
         isArrayLikeType,
         isEmptyAnonymousObjectType,
         isTypeInvalidDueToUnionDiscriminant,
+        isReadonlySymbol,
         getExactOptionalProperties,
         getAllPossiblePropertiesOfTypes,
         getSuggestedSymbolForNonexistentProperty,
